@@ -1,3 +1,5 @@
 -Iinclude
+-Iimgui
+-Ivmmlib
 -std=c++17
--lraylib
+-Wno-dangling-gsl

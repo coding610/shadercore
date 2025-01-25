@@ -13,13 +13,13 @@ OBJ_PATH=build/
 CPP_VERSION=17
 
 # Add -O3 for preformance
-# For debbing, refrain to using -O3
-CFLAGS := -O3 -Wall -g -I$(INC_DIR) -std=c++$(CPP_VERSION) -Wno-reorder-ctor
-LDFLAGS := -lraylib
+# For debbing, refrain to using -O3, and use -g
+CFLAGS := -O3 -Wall -I$(INC_DIR) -Ivmmlib -Iimgui -std=c++$(CPP_VERSION) -Wno-reorder-ctor
+LDFLAGS := -lGL -lGLEW -lglfw
 
 #_____________________COMPILE______________________
 #_____SILENT COMPILATION ENABLED BELOW_____ 
-# .SILENT: 
+.SILENT: 
 .PHONY:
 all: compile link clean_opt run
 
@@ -41,7 +41,11 @@ compile:
 
 .PHONY:
 link:
-	$(CC) ./*.o $(LDFLAGS)
+	$(CC) ./*.o ./imgui-build/*.o $(LDFLAGS)
+
+.PHONY:
+compile_imgui:
+	$(CC) -c imgui/*.cpp -Wall -std=c++$(CPP_VERSION)
 
 #_____________________CLEAN________________________
 clean_opt: obj exe

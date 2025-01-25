@@ -3,25 +3,30 @@
 
 - Stores and manages objects.
 - Provides data structures to populate SSBOs and UBOs.
-- A base class is also found, Object3D, with derived classes
-  like Sphere, Plane, Mesh etc.
 
 */
 
 #pragma once
 
 #include <engines/scene/camera.hpp>
+#include <assets/object3D.hpp>
+#include <memory>
+#include <vector>
 
-
-struct SceneCrate { };
 
 class SceneEngine {
 public:
-    SceneEngine(const SceneCrate& crate);
+    SceneEngine();
     ~SceneEngine();
 
-    void update();
+    void update();      // Update objects that needs refreshing, like the camera
+
+    ////// GETTERS AND SETTERS //////
+    void addObject(const std::shared_ptr<Object3D>& object);
+    void addObject(const std::vector<std::shared_ptr<Object3D>>& objects);
+    const std::vector<std::shared_ptr<Object3D>>& getObjects() const;
 
 private:
     CameraModule cameraModule;
+    std::vector<std::shared_ptr<Object3D>> objects;
 };

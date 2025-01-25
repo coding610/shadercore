@@ -22,8 +22,8 @@ public:
     void run();
 
 private:
-    WindowEngine    windowModule;
-    RenderEngine    renderModule;
-    SceneEngine     sceneModule;
-    UiEngine        uiModule;
+    WindowEngine    windowEngine;
+    // RenderEngine    renderEngine;
+    // SceneEngine     sceneEngine;
+    // UiEngine        uiEngine;
 };

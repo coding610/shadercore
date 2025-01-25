@@ -6,7 +6,7 @@ EXE_PATH:=bin/
 EXE_NAME=$(EXE_PATH)main
 
 
-SRC=src/*.cpp src/engines/window/*.cpp # src/engines/render/*.cpp src/engines/scene/*.cpp src/engines/ui/*.cpp
+SRC=src/*.cpp src/engines/window/*.cpp src/engines/scene/*.cpp  # src/engines/render/*.cpp src/engines/ui/*.cppapp
 SRC_DIR=src
 INC_DIR=include
 OBJ_PATH=build/

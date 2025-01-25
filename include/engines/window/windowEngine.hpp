@@ -1,4 +1,4 @@
-/*window
+/*
 -- WindowEngine of App --
 
 - Encapsulates GLFW for window creation and input handling.
@@ -13,27 +13,28 @@
 
 
 struct WindowCrate {
-    const vmml::vec2f& dimensions;
+    float width;
+    float height;
     const char* title;
 };
 
 class WindowEngine {
 public:
-    ////// BUILDERS //////
-    WindowEngine(const WindowCrate& crate);
+    ////// Default Builders //////
+    WindowEngine();
     ~WindowEngine();
 
-    /////// MAIN //////
-    void init();
+    /////// Main ///////
+    void init(const WindowCrate& crate);
     void update();
 
-    ////// GETTERS //////
+    ////// Getters //////
     GLFWwindow*     getWindow();
     vmml::vec2f&    getDimensions();
     const char*     getTitle();
 
 private:
-    ////// GLFW //////
+    ////// Glfw //////
     GLFWwindow* window;
     vmml::vec2f dimensions;
     const char* title;

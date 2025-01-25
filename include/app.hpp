@@ -8,10 +8,10 @@
 
 #pragma once
 
-#include <engines/window/engine.hpp>
-#include <engines/render/engine.hpp>
-#include <engines/scene/engine.hpp>
-#include <engines/ui/engine.hpp>
+#include <engines/window/windowEngine.hpp>
+#include <engines/render/renderEngine.hpp>
+#include <engines/scene/sceneEngine.hpp>
+#include <engines/ui/uiEngine.hpp>
 
 
 class App {
@@ -24,6 +24,6 @@ public:
 private:
     WindowEngine    windowEngine;
     // RenderEngine    renderEngine;
-    // SceneEngine     sceneEngine;
+    SceneEngine     sceneEngine;
     // UiEngine        uiEngine;
 };

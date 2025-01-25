@@ -10,9 +10,9 @@
 
 #pragma once
 
-#include <engines/scene/engine.hpp>
-#include <engines/render/buffer.hpp>
-#include <engines/render/shader.hpp>
+#include <engines/scene/sceneEngine.hpp>
+#include <engines/render/bufferModule.hpp>
+#include <engines/render/shaderModule.hpp>
 
 
 struct RenderCrate { };

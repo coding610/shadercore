@@ -1,7 +1,8 @@
 # StyleConfig
 
 ## Structure
-- Every Engine/Module should have a crate attatched.
+- Every Engine/Module should have a crate attatched to the INIT method.
+  The builder should be default.
 - Every Engine/Module should have a update method.
 - Every file should have a overview comment description.
   In this comment description the name and the parent

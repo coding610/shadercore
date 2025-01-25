@@ -1,20 +1,27 @@
 #include <app.hpp>
 #include <GLFW/glfw3.h>
-#include <engines/window/engine.hpp>
+#include <engines/window/windowEngine.hpp>
+#include <engines/scene/sceneEngine.hpp>
 
 //////////////////////
-////// BUILDERS //////
+////// Builders //////
 //////////////////////
-App::App() : windowEngine(WindowEngine({.dimensions = {500, 500}, .title = "pathtracer"}))  {
-    windowEngine.init();
+App::App() : windowEngine(WindowEngine()), sceneEngine(SceneEngine()) {
+    WindowCrate windowCrate;
+    windowCrate.width = 500;
+    windowCrate.height = 500;
+    windowCrate.title = "pathtracing";
+    windowEngine.init(windowCrate);
+
+    SceneCrate sceneCrate;
+    sceneEngine.init(sceneCrate);
 }
 
-App::~App() {
-}
+App::~App() { }
 
 
 //////////////////
-////// MAIN //////
+////// Main //////
 //////////////////
 void App::run() {
     while (!glfwWindowShouldClose(windowEngine.getWindow())) {

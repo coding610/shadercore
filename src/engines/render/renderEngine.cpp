@@ -1,6 +1,7 @@
 #include <GL/glew.h>
 #include <GL/gl.h>
 
+#include <GLFW/glfw3.h>
 #include <engines/render/renderEngine.hpp>
 #include <engines/scene/sceneEngine.hpp>
 #include <engines/render/bufferModule.hpp>
@@ -46,6 +47,7 @@ void RenderEngine::update(const SceneEngine& sceneEngine) {
     glClear(GL_COLOR_BUFFER_BIT);
 
     shaderModule.useShader("debug");
+    shaderModule.setUniform("debug", "time", glfwGetTime());
 
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

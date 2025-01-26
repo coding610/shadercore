@@ -1,9 +1,12 @@
 #version 430 core
 
-in vec2 aPos;
-out vec2 fragCoord;
+in vec2 position;
+out vec2 texCoord;
+
+uniform float time;
+
 
 void main() {
-    fragCoord = (aPos + vec2(1.0, 1.0)) * 0.5;
-    gl_Position = vec4(aPos, 0.0, 1.0);
+    gl_Position = vec4(position, 0, 1);     // Pass the shape right through
+    texCoord = position;                    // (0, 0) in the middle for these cords
 }

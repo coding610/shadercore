@@ -39,15 +39,18 @@ void RenderEngine::init(const RenderCrate& crate) {
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glBindVertexArray(0);
 
-    ////// LOAD SHADER //////
+    ////// Load shader //////
     shaderModule.loadShader("debug", "shaders/debug/debug.vert.glsl", "shaders/debug/debug.frag.glsl");
+    shaderModule.loadShader("wave", "shaders/wave/wave.vert.glsl", "shaders/wave/wave.frag.glsl");
 }
 
 void RenderEngine::update(const SceneEngine& sceneEngine) {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    shaderModule.useShader("debug");
-    shaderModule.setUniform("debug", "time", glfwGetTime());
+    ////// Shader select //////
+    // shaderModule.useShader("debug");
+    shaderModule.useShader("wave");
+    shaderModule.setUniform("wave", "time", glfwGetTime());
 
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);

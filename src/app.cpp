@@ -1,7 +1,10 @@
-#include <app.hpp>
-#include <GLFW/glfw3.h>
+// FIX THESE
+#include <GL/glew.h>
+
 #include <engines/window/windowEngine.hpp>
 #include <engines/scene/sceneEngine.hpp>
+#include <engines/render/renderEngine.hpp>
+#include <app.hpp>
 
 //////////////////////
 ////// Builders //////
@@ -15,6 +18,9 @@ App::App() : windowEngine(WindowEngine()), sceneEngine(SceneEngine()) {
 
     SceneCrate sceneCrate;
     sceneEngine.init(sceneCrate);
+
+    RenderCrate renderCrate;
+    renderEngine.init(renderCrate);
 }
 
 App::~App() { }
@@ -25,6 +31,8 @@ App::~App() { }
 //////////////////
 void App::run() {
     while (!glfwWindowShouldClose(windowEngine.getWindow())) {
+        sceneEngine.update();
+        renderEngine.update(sceneEngine);
         windowEngine.update();
     }
 }

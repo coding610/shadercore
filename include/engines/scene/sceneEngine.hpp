@@ -4,14 +4,18 @@
 - Stores and manages objects.
 - Provides data structures to populate SSBOs and UBOs.
 
+TODO:
+- Handle input
+- CameraModule
+
 */
 
 #pragma once
 
 #include <engines/scene/cameraModule.hpp>
 #include <assets/object3D.hpp>
-#include <memory>
 #include <vector>
+#include <memory>
 
 struct SceneCrate { };
 

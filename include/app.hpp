@@ -8,6 +8,8 @@
 
 #pragma once
 
+#include <GL/glew.h>
+#include <GL/gl.h>
 #include <engines/window/windowEngine.hpp>
 #include <engines/render/renderEngine.hpp>
 #include <engines/scene/sceneEngine.hpp>
@@ -23,7 +25,7 @@ public:
 
 private:
     WindowEngine    windowEngine;
-    // RenderEngine    renderEngine;
+    RenderEngine    renderEngine;
     SceneEngine     sceneEngine;
     // UiEngine        uiEngine;
 };

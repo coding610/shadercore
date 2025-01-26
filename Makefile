@@ -6,7 +6,7 @@ EXE_PATH:=bin/
 EXE_NAME=$(EXE_PATH)main
 
 
-SRC=src/*.cpp src/engines/window/*.cpp src/engines/scene/*.cpp  # src/engines/render/*.cpp src/engines/ui/*.cppapp
+SRC=src/*.cpp src/engines/window/*.cpp src/engines/scene/*.cpp src/engines/render/*.cpp src/engines/ui/*.cpp
 SRC_DIR=src
 INC_DIR=include
 OBJ_PATH=build/
@@ -15,7 +15,7 @@ CPP_VERSION=17
 # Add -O3 for preformance
 # For debbing, refrain to using -O3, and use -g
 CFLAGS := -O3 -Wall -I$(INC_DIR) -Ivmmlib -Iimgui -std=c++$(CPP_VERSION) -Wno-reorder-ctor
-LDFLAGS := -lGL -lglfw
+LDFLAGS := -lGL -lglfw -lGLEW
 
 #_____________________COMPILE______________________
 #_____SILENT COMPILATION ENABLED BELOW_____ 

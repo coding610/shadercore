@@ -1,3 +1,5 @@
+#include <GLFW/glfw3.h>
+
 #include <engines/scene/sceneEngine.hpp>
 
 
@@ -30,4 +32,6 @@ const std::vector<std::shared_ptr<Object3D>>& SceneEngine::getObjects() const { 
 ////// Main //////
 //////////////////
 void SceneEngine::init(const SceneCrate& crate) { }
-void SceneEngine::update() {}
+void SceneEngine::update() {
+    glfwPollEvents();
+}

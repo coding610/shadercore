@@ -8,13 +8,29 @@
 
 #pragma once
 
+#include <GL/glew.h>
+#include <GL/gl.h>
+#include <vmmlib/vector.hpp>
+#include <unordered_map>
+
+
 
 struct ShaderCrate { };
 
 class ShaderModule {
 public:
-    ShaderModule(const ShaderCrate& crate);
+    ShaderModule();
     ~ShaderModule();
+    void init(const ShaderCrate& crate);
+
+    void loadShader(const char* name, const char* vertPath, const char* fragPath);
+    GLuint getShader(const char* name);
+    void useShader(const char* name);
+    void setUniform(const char* shaderName, const char* uniformName, const float& value);
+    void setUniform(const char* shaderName, const char* uniformName, const vmml::vec4f& matrix);
 
 private:
+    GLuint compileShader(const char* path, GLenum shaderType);
+
+    std::unordered_map<const char*, GLuint> shaders;
 };

@@ -19,13 +19,13 @@ struct RenderCrate { };
 
 class RenderEngine {
 public:
-    RenderEngine(const RenderCrate& crate);
+    RenderEngine();
     ~RenderEngine();
 
+    void init(const RenderCrate& crate);
     void update(const SceneEngine& sceneEngine);
 
 private:
-    ShaderModule& shaderModule;
-    BufferModule& bufferModule;
-
+    ShaderModule shaderModule;
+    BufferModule bufferModule;
 };

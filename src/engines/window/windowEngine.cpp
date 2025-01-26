@@ -1,7 +1,9 @@
 #include <stdexcept>
+#include <GL/glew.h>
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
 #include <vmmlib/vector.hpp>
+
 
 #include <engines/window/windowEngine.hpp>
 
@@ -26,7 +28,7 @@ const char*     WindowEngine::getTitle()      { return title; }
 
 
 //////////////////
-////// MAIN //////
+////// Main //////
 //////////////////
 void WindowEngine::init(const WindowCrate& crate) {
     ////// Members //////
@@ -46,12 +48,13 @@ void WindowEngine::init(const WindowCrate& crate) {
     glfwMakeContextCurrent(window);
     glfwSetWindowUserPointer(window, this);
 
-    ////// OpenGL //////
+    ////// GLEW //////
+    glewExperimental = GL_TRUE;
+    if (glewInit() != GLEW_OK) { throw std::runtime_error("Fatal Error: App::WindowEngine::init()::glewInit()"); }
     glViewport(0, 0, dimensions.x(), dimensions.y());
     glEnable(GL_DEPTH_TEST);
 }
 
 void WindowEngine::update() {
     glfwSwapBuffers(window);
-    glfwPollEvents();
 }

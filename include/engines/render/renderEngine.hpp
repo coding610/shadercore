@@ -28,4 +28,6 @@ public:
 private:
     ShaderModule shaderModule;
     BufferModule bufferModule;
+
+    GLuint VAO, VBO, EBO;
 };

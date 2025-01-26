@@ -1,9 +1,8 @@
-#include <stdexcept>
 #include <GL/glew.h>
 #include <GL/gl.h>
 #include <GLFW/glfw3.h>
 #include <vmmlib/vector.hpp>
-
+#include <stdexcept>
 
 #include <engines/window/windowEngine.hpp>
 
@@ -52,9 +51,15 @@ void WindowEngine::init(const WindowCrate& crate) {
     glewExperimental = GL_TRUE;
     if (glewInit() != GLEW_OK) { throw std::runtime_error("Fatal Error: App::WindowEngine::init()::glewInit()"); }
     glViewport(0, 0, dimensions.x(), dimensions.y());
-    glEnable(GL_DEPTH_TEST);
+    glDisable(GL_DEPTH_TEST);
 }
 
 void WindowEngine::update() {
+    ////// UPDATE RESOLUTION //////
+    int width, height;
+    glfwGetFramebufferSize(window, &width, &height);
+    glViewport(0, 0, width, height);
+    dimensions = {static_cast<float>(width), static_cast<float>(height)};
+
     glfwSwapBuffers(window);
 }

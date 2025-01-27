@@ -4,16 +4,17 @@
 #include <engines/window/windowEngine.hpp>
 #include <engines/scene/sceneEngine.hpp>
 #include <engines/render/renderEngine.hpp>
+#include <engines/ui/uiEngine.hpp>
 #include <app.hpp>
 
 //////////////////////
 ////// Builders //////
 //////////////////////
-App::App() : windowEngine(WindowEngine()), sceneEngine(SceneEngine()) {
+App::App() {
     WindowCrate windowCrate;
-    windowCrate.width = 500;
-    windowCrate.height = 500;
-    windowCrate.title = "pathtracing";
+    windowCrate.width = 1920;
+    windowCrate.height = 1080;
+    windowCrate.title = "shadercore";
     windowEngine.init(windowCrate);
 
     SceneCrate sceneCrate;
@@ -21,6 +22,10 @@ App::App() : windowEngine(WindowEngine()), sceneEngine(SceneEngine()) {
 
     RenderCrate renderCrate;
     renderEngine.init(renderCrate);
+
+    UiCrate uiCrate;
+    uiCrate.windowEngine = &windowEngine;
+    uiEngine.init(uiCrate);
 }
 
 App::~App() { }
@@ -33,6 +38,7 @@ void App::run() {
     while (!glfwWindowShouldClose(windowEngine.getWindow())) {
         sceneEngine.update();
         renderEngine.update(sceneEngine);
+        uiEngine.update(renderEngine, sceneEngine);
         windowEngine.update();
     }
 }

@@ -1,15 +1,24 @@
 #include <GL/glew.h>
-#include <GL/gl.h>
-
 #include <GLFW/glfw3.h>
+#include <GL/gl.h>
+#include <format>
+
 #include <engines/render/renderEngine.hpp>
 #include <engines/scene/sceneEngine.hpp>
 #include <engines/render/bufferModule.hpp>
 #include <engines/render/shaderModule.hpp>
 
+
+//////////////////////
+////// Builders //////
+//////////////////////
 RenderEngine::RenderEngine() { }
 RenderEngine::~RenderEngine() { }
 
+
+//////////////////
+////// Main //////
+//////////////////
 void RenderEngine::init(const RenderCrate& crate) {
     ////// Setup fullscreen quad to draw on //////
 
@@ -40,18 +49,29 @@ void RenderEngine::init(const RenderCrate& crate) {
     glBindVertexArray(0);
 
     ////// Load shader //////
-    shaderModule.loadShader("debug", "shaders/debug/debug.vert.glsl", "shaders/debug/debug.frag.glsl");
-    shaderModule.loadShader("wave", "shaders/wave/wave.vert.glsl", "shaders/wave/wave.frag.glsl");
+    shaderStatuses = {{"debug", 1}, {"wave", 0}};
+    for (const auto& pair : shaderStatuses) {
+        const char* key = pair.first;
+        shaderModule.loadShader(key, std::format("shaders/{}/{}.vert.glsl", key, key).c_str(), std::format("shaders/{}/{}.frag.glsl", key, key).c_str());
+    }
 }
 
 void RenderEngine::update(const SceneEngine& sceneEngine) {
     glClear(GL_COLOR_BUFFER_BIT);
 
-    ////// Shader select //////
-    // shaderModule.useShader("debug");
-    shaderModule.useShader("wave");
-    shaderModule.setUniform("wave", "time", glfwGetTime());
+    ////// Shader select ///////
+    for (const auto& pair : shaderStatuses) { if (pair.second == 1) shaderInUse = pair.first; }
+    shaderModule.useShader(shaderInUse);
+
+    if (shaderInUse == std::string("wave")) shaderModule.setUniform("wave", "time", glfwGetTime());
 
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }
+
+
+/////////////////////////////////
+////// Setters and Getters //////
+/////////////////////////////////
+std::unordered_map<const char*, bool> RenderEngine::getShaderStatuses() const { return shaderStatuses; }
+void RenderEngine::setShaderStatuses(std::unordered_map<const char*, bool> shaders) { shaderStatuses = shaders; }

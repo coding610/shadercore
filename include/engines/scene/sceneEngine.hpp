@@ -12,10 +12,11 @@ TODO:
 
 #pragma once
 
-#include <engines/scene/cameraModule.hpp>
-#include <assets/object3D.hpp>
 #include <vector>
 #include <memory>
+
+#include <engines/scene/cameraModule.hpp>
+#include <assets/object3D.hpp>
 
 struct SceneCrate { };
 

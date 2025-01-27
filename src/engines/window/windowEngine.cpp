@@ -5,6 +5,7 @@
 #include <stdexcept>
 
 #include <engines/window/windowEngine.hpp>
+#include <debug.hpp>
 
 
 //////////////////////
@@ -21,9 +22,9 @@ WindowEngine::~WindowEngine() {
 /////////////////////
 ////// Getters //////
 /////////////////////
-GLFWwindow*     WindowEngine::getWindow()     { return window; }
-vmml::vec2f&    WindowEngine::getDimensions() { return dimensions;  }
-const char*     WindowEngine::getTitle()      { return title; }
+GLFWwindow*           WindowEngine::getWindow()     const { return window; }
+const vmml::vec2f&    WindowEngine::getDimensions() const { return dimensions;  }
+const char*           WindowEngine::getTitle()      const { return title; }
 
 
 //////////////////

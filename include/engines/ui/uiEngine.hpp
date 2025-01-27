@@ -9,15 +9,28 @@
 
 #pragma once
 
+#include <GL/glew.h>
+#include <GLFW/glfw3.h>
+#include <GL/gl.h>
 
-struct UiCrate { };
+#include <engines/window/windowEngine.hpp>
+#include <engines/render/renderEngine.hpp>
+#include <engines/scene/sceneEngine.hpp>
+
+
+struct UiCrate {
+    const WindowEngine* windowEngine;
+};
 
 class UiEngine {
 public:
-    UiEngine(const UiCrate& crate);
+    UiEngine();
     ~UiEngine();
 
-    void update();
+    void init(const UiCrate& crate);
+    void update(RenderEngine& renderEngine, const SceneEngine& sceneEngine);
 
 private:
+    void dockingLayout();
+    void uiLayout(RenderEngine& renderEngine, const SceneEngine& sceneEngine);
 };

@@ -1,6 +1,10 @@
 # StyleConfig
 
 ## Structure
+- Every file using either one of a opengl dependency should include all in the order below:
+    - glew
+    - glfw3
+    - gl
 - Modules are more flexible than engines in design.
 - Every Engine should have a crate attatched to the INIT method.
   The builder should be default.

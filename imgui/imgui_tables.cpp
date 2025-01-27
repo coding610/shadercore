@@ -57,6 +57,7 @@ Index of this file:
 //    | TableOpenContextMenu()                  - when right-clicked: trigger opening of the default context menu
 // - TableGetSortSpecs()                        user queries updated sort specs (optional, generally after submitting headers)
 // - TableNextRow()                             user begin into a new row (also automatically called by TableHeadersRow())
+            // 
 //    | TableEndRow()                           - finish existing row
 //    | TableBeginRow()                         - add a new row
 // - TableSetColumnIndex() / TableNextColumn()  user begin into a cell

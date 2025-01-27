@@ -10,7 +10,7 @@ SRC=src/*.cpp src/engines/window/*.cpp src/engines/scene/*.cpp src/engines/rende
 SRC_DIR=src
 INC_DIR=include
 OBJ_PATH=build/
-CPP_VERSION=17
+CPP_VERSION=20
 
 # Add -O3 for preformance
 # For debbing, refrain to using -O3, and use -g

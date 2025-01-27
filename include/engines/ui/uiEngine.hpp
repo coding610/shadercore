@@ -31,6 +31,5 @@ public:
     void update(RenderEngine& renderEngine, const SceneEngine& sceneEngine);
 
 private:
-    void dockingLayout();
     void uiLayout(RenderEngine& renderEngine, const SceneEngine& sceneEngine);
 };

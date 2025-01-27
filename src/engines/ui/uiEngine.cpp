@@ -1,12 +1,13 @@
 #include <GL/glew.h>
 #include <GLFW/glfw3.h>
 #include <GL/gl.h>
-#include <cwctype>
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+#include <vmmlib/vector.hpp>
 #include <unordered_map>
+#include <cwctype>
 
 #include <engines/render/renderEngine.hpp>
 #include <engines/scene/sceneEngine.hpp>
@@ -29,15 +30,11 @@ void UiEngine::init(const UiCrate& crate) {
     ImGuiIO& io = ImGui::GetIO(); (void) io;
 
     ImGui_ImplGlfw_InitForOpenGL(crate.windowEngine->getWindow(), true);
-    ImGui_ImplOpenGL3_Init("#version 330 core");
+    ImGui_ImplOpenGL3_Init("#version 430 core");
 
     io.ConfigFlags |= ImGuiConfigFlags_DockingEnable;
     ImGui::StyleColorsDark();
 
-    dockingLayout();
-}
-
-void UiEngine::dockingLayout() {
 }
 
 void UiEngine::update(RenderEngine& renderEngine, const SceneEngine& sceneEngine) {
@@ -45,8 +42,7 @@ void UiEngine::update(RenderEngine& renderEngine, const SceneEngine& sceneEngine
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    ImGui::DockSpaceOverViewport(ImGui::GetID(ImGui::GetMainViewport()), ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
-
+    ImGuiID dockspaceID = ImGui::DockSpaceOverViewport(ImGui::GetID(ImGui::GetMainViewport()), ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
     uiLayout(renderEngine, sceneEngine);
 
     ImGui::Render();

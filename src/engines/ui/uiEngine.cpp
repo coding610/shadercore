@@ -42,7 +42,7 @@ void UiEngine::update(RenderEngine& renderEngine, const SceneEngine& sceneEngine
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
-    ImGuiID dockspaceID = ImGui::DockSpaceOverViewport(ImGui::GetID(ImGui::GetMainViewport()), ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
+    ImGui::DockSpaceOverViewport(ImGui::GetID(ImGui::GetMainViewport()), ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
     uiLayout(renderEngine, sceneEngine);
 
     ImGui::Render();

@@ -16,7 +16,7 @@ TODO:
 #include <memory>
 
 #include <engines/scene/cameraModule.hpp>
-#include <assets/object3D.hpp>
+#include <models/object3D.hpp>
 
 struct SceneCrate { };
 
@@ -26,7 +26,7 @@ public:
     ~SceneEngine();
 
     void init(const SceneCrate& crate);
-    void update();  // Used for update objects that needs refreshing, like the camera
+    void update();
 
     ////// Setters //////
     void addObject(const std::shared_ptr<Object3D>& object);
@@ -36,6 +36,6 @@ public:
     const std::vector<std::shared_ptr<Object3D>>& getObjects() const;
 
 private:
-    // CameraModule cameraModule;
+    CameraModule cameraModule;
     std::vector<std::shared_ptr<Object3D>> objects;
 };

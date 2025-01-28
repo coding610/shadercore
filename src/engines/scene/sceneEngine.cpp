@@ -1,12 +1,14 @@
 #include <GLFW/glfw3.h>
 
 #include <engines/scene/sceneEngine.hpp>
+#include <engines/scene/cameraModule.hpp>
+#include <models/object3D.hpp>
 
 
 //////////////////////
 ////// Builders //////
 //////////////////////
-SceneEngine::SceneEngine() : objects({}) {}
+SceneEngine::SceneEngine() : objects({}), cameraModule() {}
 SceneEngine::~SceneEngine() {}
 
 

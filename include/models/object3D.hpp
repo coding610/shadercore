@@ -9,10 +9,10 @@
 #pragma once
 
 #include <vmmlib/vector.hpp>
-#include <assets/material.hpp>
+#include <models/material.hpp>
 
 
-struct Object3D {};
+struct Object3D { };
 
 struct Sphere : Object3D {
     vmml::vec3f position;

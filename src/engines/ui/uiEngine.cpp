@@ -11,6 +11,7 @@
 
 #include <engines/render/renderEngine.hpp>
 #include <engines/scene/sceneEngine.hpp>
+#include <engines/camera/cameraEngine.hpp>
 #include <engines/ui/uiEngine.hpp>
 #include <debug.hpp>
 
@@ -37,19 +38,19 @@ void UiEngine::init(const UiCrate& crate) {
 
 }
 
-void UiEngine::update(RenderEngine& renderEngine, const SceneEngine& sceneEngine) {
+void UiEngine::update(RenderEngine& renderEngine, const SceneEngine& sceneEngine, CameraEngine& cameraEngine) {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     ImGui::NewFrame();
 
     ImGui::DockSpaceOverViewport(ImGui::GetID(ImGui::GetMainViewport()), ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
-    uiLayout(renderEngine, sceneEngine);
+    uiLayout(renderEngine, sceneEngine, cameraEngine);
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
 
-void UiEngine::uiLayout(RenderEngine& renderEngine, const SceneEngine& sceneEngine) {
+void UiEngine::uiLayout(RenderEngine& renderEngine, const SceneEngine& sceneEngine, CameraEngine& cameraEngine) {
     ImGui::Begin("Shader");
 
     if (ImGui::CollapsingHeader("Shader Program")) { ImGui::Indent();
@@ -69,9 +70,13 @@ void UiEngine::uiLayout(RenderEngine& renderEngine, const SceneEngine& sceneEngi
 
     ImGui::Begin("World");
     
-    if (ImGui::CollapsingHeader("Camera")) {
-        CameraCrate crate;
-        ImGui::SliderFloat("Focal Point", &crate.focalLength, 0, 10);
+    if (ImGui::CollapsingHeader("Camera")) { ImGui::Indent();
+        CameraCrate crate = cameraEngine.buildCrate();
+        ImGui::SliderFloat3("Position", &crate.position.x(), -10, 10);
+        ImGui::SliderFloat3("Direction", &crate.direction.x(), -1, 1);
+        ImGui::SliderFloat("Fov", &crate.fov, 0, 120);
+        ImGui::SliderFloat("Focal Length", &crate.focalLength, 0.5, 3);
+        cameraEngine.setCrate(crate);
     }
 
     ImGui::End();

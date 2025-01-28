@@ -7,13 +7,15 @@
 
 */
 
-
 #pragma once
 
+#include <unordered_map>
+
+#include <engines/scene/sceneEngine.hpp>
+#include <engines/camera/cameraEngine.hpp>
 #include <engines/render/bufferModule.hpp>
 #include <engines/render/shaderModule.hpp>
-#include <engines/scene/sceneEngine.hpp>
-#include <unordered_map>
+
 
 struct RenderCrate { };
 
@@ -23,11 +25,10 @@ public:
     ~RenderEngine();
 
     void init(const RenderCrate& crate);
-    void update(const SceneEngine& sceneEngine);
+    void update(const SceneEngine& sceneEngine, const CameraEngine& cameraEngine);
 
     std::unordered_map<const char*, bool> getShaderStatuses() const;
     void setShaderStatuses(std::unordered_map<const char*, bool> shaders);
-    
 
 private:
     ShaderModule shaderModule;

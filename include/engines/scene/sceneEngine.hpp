@@ -15,7 +15,6 @@ TODO:
 #include <vector>
 #include <memory>
 
-#include <engines/scene/cameraModule.hpp>
 #include <models/object3D.hpp>
 
 struct SceneCrate { };
@@ -34,9 +33,7 @@ public:
     
     ////// Getters //////
     const std::vector<std::shared_ptr<Object3D>>& getObjects() const;
-    const CameraUBOCrate getCameraCrate() const;
 
 private:
-    CameraModule cameraModule;
     std::vector<std::shared_ptr<Object3D>> objects;
 };

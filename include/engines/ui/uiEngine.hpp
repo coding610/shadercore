@@ -16,6 +16,7 @@
 #include <engines/window/windowEngine.hpp>
 #include <engines/render/renderEngine.hpp>
 #include <engines/scene/sceneEngine.hpp>
+#include <engines/camera/cameraEngine.hpp>
 
 
 struct UiCrate {
@@ -28,8 +29,8 @@ public:
     ~UiEngine();
 
     void init(const UiCrate& crate);
-    void update(RenderEngine& renderEngine, const SceneEngine& sceneEngine);
+    void update(RenderEngine& renderEngine, const SceneEngine& sceneEngine, CameraEngine& cameraEngine);
 
 private:
-    void uiLayout(RenderEngine& renderEngine, const SceneEngine& sceneEngine);
+    void uiLayout(RenderEngine& renderEngine, const SceneEngine& sceneEngine, CameraEngine& cameraEngine);
 };

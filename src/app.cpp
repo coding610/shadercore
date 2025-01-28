@@ -4,6 +4,7 @@
 #include <engines/window/windowEngine.hpp>
 #include <engines/scene/sceneEngine.hpp>
 #include <engines/render/renderEngine.hpp>
+#include <engines/camera/cameraEngine.hpp>
 #include <engines/ui/uiEngine.hpp>
 #include <app.hpp>
 
@@ -26,6 +27,13 @@ App::App() {
     UiCrate uiCrate;
     uiCrate.windowEngine = &windowEngine;
     uiEngine.init(uiCrate);
+
+    CameraCrate cameraCrate;
+    cameraCrate.position    = {0, 0, 0};
+    cameraCrate.direction   = {0, 0, -1};
+    cameraCrate.fov         = 90;
+    cameraCrate.focalLength = 2;
+    cameraEngine.init(cameraCrate);
 }
 
 App::~App() { }
@@ -37,8 +45,9 @@ App::~App() { }
 void App::run() {
     while (!glfwWindowShouldClose(windowEngine.getWindow())) {
         sceneEngine.update();
-        renderEngine.update(sceneEngine);
-        uiEngine.update(renderEngine, sceneEngine);
+        cameraEngine.update();
+        renderEngine.update(sceneEngine, cameraEngine);
+        uiEngine.update(renderEngine, sceneEngine, cameraEngine);
         windowEngine.update();
     }
 }

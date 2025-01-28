@@ -14,29 +14,32 @@
 struct CameraCrate {
     vmml::vec3f position;
     vmml::vec3f direction;
-    vmml::vec2f fov;
+    float fov;
     float focalLength;
 };
 
 struct CameraUBOCrate {
     alignas(16) vmml::vec3f position;
     alignas(16) vmml::vec3f direction;
-    alignas(16) vmml::vec2f fov;
+    alignas(16) float fov;
     alignas(16) float focalLength;
 };
 
-class CameraModule {
+class CameraEngine {
 public:
-    CameraModule();
-    ~CameraModule();
+    CameraEngine();
+    ~CameraEngine();
 
     void init(const CameraCrate& crate);
     void update();
+
     const CameraUBOCrate buildUBOCrate() const;
+    const CameraCrate buildCrate()       const;
+    void setCrate(const CameraCrate& crate);
 
 private:
     vmml::vec3f position;
     vmml::vec3f direction;
-    vmml::vec2f fov;
+    float fov;
     float focalLength;
 };

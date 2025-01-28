@@ -49,7 +49,7 @@ void RenderEngine::init(const RenderCrate& crate) {
     glBindVertexArray(0);
 
     ////// Load shader //////
-    shaderStatuses = {{"debug", 1}, {"wave", 0}};
+    shaderStatuses = {{"debug", 0}, {"wave", 0}, {"pathtracer", 1}};
     for (const auto& pair : shaderStatuses) {
         const char* key = pair.first;
         shaderModule.loadShader(key, std::format("shaders/{}/{}.vert.glsl", key, key).c_str(), std::format("shaders/{}/{}.frag.glsl", key, key).c_str());

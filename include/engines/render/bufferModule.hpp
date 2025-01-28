@@ -24,7 +24,6 @@ public:
 
     void createBuffer(const char* name, GLenum type, size_t size, GLuint bindingPoint);
     void updateBuffer(const char* name, const void* data, size_t size);
-    void bindBuffer(const char* name);
 
 private:
     struct Buffer {

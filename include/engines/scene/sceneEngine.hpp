@@ -34,6 +34,7 @@ public:
     
     ////// Getters //////
     const std::vector<std::shared_ptr<Object3D>>& getObjects() const;
+    const CameraUBOCrate getCameraCrate() const;
 
 private:
     CameraModule cameraModule;

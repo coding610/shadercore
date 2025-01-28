@@ -5,16 +5,16 @@
 
 #include <engines/render/renderEngine.hpp>
 #include <engines/scene/sceneEngine.hpp>
+#include <engines/scene/cameraModule.hpp>
+#include <engines/scene/cameraModule.hpp>
 #include <engines/render/bufferModule.hpp>
 #include <engines/render/shaderModule.hpp>
-
 
 //////////////////////
 ////// Builders //////
 //////////////////////
 RenderEngine::RenderEngine() { }
 RenderEngine::~RenderEngine() { }
-
 
 //////////////////
 ////// Main //////
@@ -54,17 +54,23 @@ void RenderEngine::init(const RenderCrate& crate) {
         const char* key = pair.first;
         shaderModule.loadShader(key, std::format("shaders/{}/{}.vert.glsl", key, key).c_str(), std::format("shaders/{}/{}.frag.glsl", key, key).c_str());
     }
+
+    bufferModule.createBuffer("camera", GL_UNIFORM_BUFFER, sizeof(CameraCrate), 0);
 }
 
 void RenderEngine::update(const SceneEngine& sceneEngine) {
+    ////// Clear screen //////
     glClear(GL_COLOR_BUFFER_BIT);
 
-    ////// Shader select ///////
+    ////// Shaders ///////
     for (const auto& pair : shaderStatuses) { if (pair.second == 1) shaderInUse = pair.first; }
     shaderModule.useShader(shaderInUse);
-
     if (shaderInUse == std::string("wave")) shaderModule.setUniform("wave", "time", glfwGetTime());
 
+    CameraUBOCrate cameraCrate = sceneEngine.getCameraCrate();
+    bufferModule.updateBuffer("camera", &cameraCrate, sizeof(CameraUBOCrate));
+     
+    ////// Draw Quad //////
     glBindVertexArray(VAO);
     glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 }

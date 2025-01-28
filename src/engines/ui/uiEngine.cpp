@@ -68,5 +68,11 @@ void UiEngine::uiLayout(RenderEngine& renderEngine, const SceneEngine& sceneEngi
     ImGui::End();
 
     ImGui::Begin("World");
+    
+    if (ImGui::CollapsingHeader("Camera")) {
+        CameraCrate crate;
+        ImGui::SliderFloat("Focal Point", &crate.focalLength, 0, 10);
+    }
+
     ImGui::End();
-}
+};

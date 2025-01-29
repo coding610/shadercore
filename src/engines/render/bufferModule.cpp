@@ -4,13 +4,20 @@
 #include <engines/render/bufferModule.hpp>
 
 
+///////////////////////
+/////// Builders //////
+///////////////////////
 BufferModule::BufferModule() { }
 BufferModule::~BufferModule() {
     for (const auto& [name, buffer] : buffers) { glDeleteBuffers(1, &buffer.id); }
     buffers.clear();
 }
-void BufferModule::init(const BufferCrate& crate) { }
 
+
+//////////////////
+////// Main //////
+//////////////////
+void BufferModule::init(const BufferCrate& crate) { }
 void BufferModule::createBuffer(const char* name, GLenum type, size_t size, GLuint bindingPoint) {
     GLuint buffer;
     glGenBuffers(1, &buffer);

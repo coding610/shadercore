@@ -13,27 +13,26 @@ TODO:
 #pragma once
 
 #include <vector>
-#include <memory>
 
 #include <models/object3D.hpp>
 
-struct SceneCrate { };
+
+struct SceneCrate {
+    std::vector<Object3D> objects;
+};
 
 class SceneEngine {
 public:
     SceneEngine();
     ~SceneEngine();
 
+    void buildCrate(SceneCrate& crate);
+    void applyCrate(const SceneCrate& crate);
+
     void init(const SceneCrate& crate);
     void update();
 
-    ////// Setters //////
-    void addObject(const std::shared_ptr<Object3D>& object);
-    void addObject(const std::vector<std::shared_ptr<Object3D>>& objects);
-    
-    ////// Getters //////
-    const std::vector<std::shared_ptr<Object3D>>& getObjects() const;
 
 private:
-    std::vector<std::shared_ptr<Object3D>> objects;
+    std::vector<Object3D> objects;
 };

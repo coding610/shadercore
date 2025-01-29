@@ -2,7 +2,7 @@
 -- RenderEngine of App --
 
 - Core rendering logic; shader program and rendering pipeline.
-- Responsible for initizialsing shaders and frame buffers.
+- Responsible for initizialsing shaders and buffers (its sub modules).
 - Includes two modules, ShaderModule and BufferModule.
 
 */
@@ -17,18 +17,20 @@
 #include <engines/render/shaderModule.hpp>
 
 
-struct RenderCrate { };
+struct RenderCrate {
+    std::unordered_map<const char*, bool> shaderStatuses;
+};
 
 class RenderEngine {
 public:
     RenderEngine();
     ~RenderEngine();
 
-    void init(const RenderCrate& crate);
+    void init(const RenderCrate& crate, const SceneEngine& sceneEngine);
     void update(const SceneEngine& sceneEngine, const CameraEngine& cameraEngine);
 
-    std::unordered_map<const char*, bool> getShaderStatuses() const;
-    void setShaderStatuses(std::unordered_map<const char*, bool> shaders);
+    void buildCrate(RenderCrate& crate) const;
+    void applyCrate(const RenderCrate& crate);
 
 private:
     ShaderModule shaderModule;

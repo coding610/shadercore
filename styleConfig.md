@@ -21,6 +21,13 @@
   called from the constructor. The init will handle creating of
   private members, and the constructor initializes the create info.
 
+
+Importante:
+    - One should only be able to access other engines by building a crate. The crate should be the same crate that one builds it with.
+        - Exceptions: Camera Window
+    - When running init, other engines should be provided outsidew of the crate
+
+
 ## Naming
 ### Code
 PascalCase for every class/struct.
@@ -61,6 +68,7 @@ camelCase for every class member/method.
 - Methods over variables
 - Long functions is prefered. Seperating functions into many is a possibility, but use it carefully.
 - Comment seperators is in the form of "////// \[\[speration\]\] //////"
+- They go: Builders, Setters and Getters (preferably one liners), Main
 - Include order:
     - std libs
     - opengl

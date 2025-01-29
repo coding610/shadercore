@@ -19,9 +19,9 @@ WindowEngine::~WindowEngine() {
 };
 
 
-/////////////////////
-////// Getters //////
-/////////////////////
+/////////////////////////////////
+////// Setters and Getters //////
+/////////////////////////////////
 GLFWwindow*           WindowEngine::getWindow()     const { return window; }
 const vmml::vec2f&    WindowEngine::getDimensions() const { return dimensions;  }
 const char*           WindowEngine::getTitle()      const { return title; }
@@ -32,7 +32,7 @@ const char*           WindowEngine::getTitle()      const { return title; }
 //////////////////
 void WindowEngine::init(const WindowCrate& crate) {
     ////// Members //////
-    dimensions = {crate.width, crate.height};
+    dimensions = crate.dimensions;
     title      = crate.title;
 
     ////// Glfw //////
@@ -56,7 +56,7 @@ void WindowEngine::init(const WindowCrate& crate) {
 }
 
 void WindowEngine::update() {
-    ////// UPDATE RESOLUTION //////
+    ////// Update res //////
     int width, height;
     glfwGetFramebufferSize(window, &width, &height);
     glViewport(0, 0, width, height);

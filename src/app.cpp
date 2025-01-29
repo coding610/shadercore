@@ -8,25 +8,13 @@
 #include <engines/ui/uiEngine.hpp>
 #include <app.hpp>
 
+
 //////////////////////
 ////// Builders //////
 //////////////////////
 App::App() {
-    WindowCrate windowCrate;
-    windowCrate.width = 1920;
-    windowCrate.height = 1080;
-    windowCrate.title = "shadercore";
-    windowEngine.init(windowCrate);
-
     SceneCrate sceneCrate;
     sceneEngine.init(sceneCrate);
-
-    RenderCrate renderCrate;
-    renderEngine.init(renderCrate);
-
-    UiCrate uiCrate;
-    uiCrate.windowEngine = &windowEngine;
-    uiEngine.init(uiCrate);
 
     CameraCrate cameraCrate;
     cameraCrate.position    = {0, 0, 0};
@@ -34,9 +22,20 @@ App::App() {
     cameraCrate.fov         = 90;
     cameraCrate.focalLength = 2;
     cameraEngine.init(cameraCrate);
-}
 
-App::~App() { }
+    WindowCrate windowCrate;
+    windowCrate.dimensions = {1920, 1080};
+    windowCrate.title = "pathtracer";
+    windowEngine.init(windowCrate);
+
+    RenderCrate renderCrate;
+    renderCrate.shaderStatuses = {{"debug", 0}, {"wave", 0}, {"pathtracer", 1}};
+    renderEngine.init(renderCrate, sceneEngine);
+
+    UiCrate uiCrate;
+    uiEngine.init(uiCrate, windowEngine);
+
+}; App::~App() { }
 
 
 //////////////////

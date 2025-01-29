@@ -7,9 +7,24 @@
 #include <engines/render/shaderModule.hpp>
 
 
+//////////////////////
+////// Builders //////
+//////////////////////
 ShaderModule::ShaderModule() { }
 ShaderModule::~ShaderModule() { }
+
+
+//////////////////
+////// Main //////
+//////////////////
 void ShaderModule::init(const ShaderCrate& crate) { }
+void ShaderModule::useShader(const char* name) {
+    glUseProgram(shaders.at(name));
+}
+
+void ShaderModule::setUniform(const char* shaderName, const char* uniformName, const float& value) {
+    glUniform1f(glGetUniformLocation(shaders.at(shaderName), uniformName), value);
+}
 
 void ShaderModule::loadShader(const char* name, const char* vertPath, const char* fragPath) {
     GLuint vertexShader = compileShader(vertPath, GL_VERTEX_SHADER);
@@ -31,26 +46,6 @@ void ShaderModule::loadShader(const char* name, const char* vertPath, const char
     glDeleteShader(fragmentShader);
 
     shaders[name] = shaderProgram;
-}
-
-GLuint ShaderModule::getShader(const char* name) {
-    return shaders.at(name);
-}
-
-void ShaderModule::useShader(const char* name) {
-    glUseProgram(shaders.at(name));
-}
-
-void ShaderModule::setUniform(const char* shaderName, const char* uniformName, const float& value) {
-    GLuint shaderProgram = shaders.at(shaderName);
-    GLuint location = glGetUniformLocation(shaderProgram, uniformName);
-    glUniform1f(location, value);
-}
-
-void ShaderModule::setUniform(const char* shaderName, const char* uniformName, const vmml::vec4f& matrix) {
-    GLuint shaderProgram = shaders.at(shaderName);
-    GLuint location = glGetUniformLocation(shaderProgram, uniformName);
-    glUniformMatrix4fv(location, 1, GL_FALSE, matrix);
 }
 
 GLuint ShaderModule::compileShader(const char* path, GLenum shaderType) {

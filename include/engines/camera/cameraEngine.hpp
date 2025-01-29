@@ -18,7 +18,7 @@ struct CameraCrate {
     float focalLength;
 };
 
-struct CameraUBOCrate {
+struct CameraBufferCrate {
     alignas(16) vmml::vec3f position;
     alignas(16) vmml::vec3f direction;
     alignas(16) float fov;
@@ -30,12 +30,12 @@ public:
     CameraEngine();
     ~CameraEngine();
 
+    void buildCrate(CameraBufferCrate& crate) const;
+    void buildCrate(CameraCrate& crate) const;
+    void applyCrate(const CameraCrate& crate);
+
     void init(const CameraCrate& crate);
     void update();
-
-    const CameraUBOCrate buildUBOCrate() const;
-    const CameraCrate buildCrate()       const;
-    void setCrate(const CameraCrate& crate);
 
 private:
     vmml::vec3f position;

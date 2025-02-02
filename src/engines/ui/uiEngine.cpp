@@ -46,7 +46,7 @@ void UiEngine::update(RenderEngine& renderEngine, const SceneEngine& sceneEngine
     ImGui::NewFrame();
 
     ImGui::DockSpaceOverViewport(ImGui::GetID(ImGui::GetMainViewport()), ImGui::GetMainViewport(), ImGuiDockNodeFlags_PassthruCentralNode);
-    uiLayout(renderEngine, sceneEngine);
+    uiLayout(renderEngine, sceneEngine, cameraEngine);
 
     ImGui::Render();
     ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());

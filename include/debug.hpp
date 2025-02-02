@@ -1,8 +1,7 @@
 /*
 -- Debug --
 
-Macros for easier debugging.
-
+- Macros for easier debugging.
 */
 
 

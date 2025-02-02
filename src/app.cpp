@@ -29,7 +29,7 @@ App::App() {
     windowEngine.init(windowCrate);
 
     RenderCrate renderCrate;
-    renderCrate.shaderStatuses = {{"debug", 0}, {"wave", 0}, {"pathtracer", 1}};
+    renderCrate.shaderStatuses = {{"debug", 0}, {"wave", 1}, {"pathtracer", 0}};
     renderEngine.init(renderCrate, sceneEngine);
 
     UiCrate uiCrate;

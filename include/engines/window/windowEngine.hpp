@@ -3,7 +3,6 @@
 
 - Encapsulates GLFW for window creation and input handling.
 - Stores window dimensions, input callbacks and OpenGL contex details.
-
 */
 
 #pragma once
@@ -13,8 +12,7 @@
 
 
 struct WindowCrate {
-    float width;
-    float height;
+    vmml::vec2f dimensions;
     const char* title;
 };
 
@@ -29,9 +27,9 @@ public:
     void update();
 
     ////// Getters //////
-    GLFWwindow*     getWindow()           const;
-    const vmml::vec2f&    getDimensions() const;
-    const char*     getTitle()            const;
+    GLFWwindow* getWindow() const;
+    const vmml::vec2f& getDimensions() const;
+    const char* getTitle() const;
 
 private:
     ////// Glfw //////

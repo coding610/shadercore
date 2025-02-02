@@ -1,9 +1,8 @@
 /*
 -- BufferModule of RenderEngine --
 
-- creates and initializes the SSBO and UBOs during setup
+- Creates and initializes the SSBO and UBOs during setup
 - Updates GPU buffers during runtime
-
 */
 
 #pragma once
@@ -24,7 +23,6 @@ public:
 
     void createBuffer(const char* name, GLenum type, size_t size, GLuint bindingPoint);
     void updateBuffer(const char* name, const void* data, size_t size);
-    void bindBuffer(const char* name);
 
 private:
     struct Buffer {

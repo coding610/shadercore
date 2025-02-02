@@ -6,36 +6,31 @@
 
 TODO:
 - Handle input
-- CameraModule
-
 */
 
 #pragma once
 
 #include <vector>
-#include <memory>
 
-#include <engines/scene/cameraModule.hpp>
-#include <assets/object3D.hpp>
+#include <models/object3D.hpp>
 
-struct SceneCrate { };
+
+struct SceneCrate {
+    std::vector<Object3D> objects;
+};
 
 class SceneEngine {
 public:
     SceneEngine();
     ~SceneEngine();
 
-    void init(const SceneCrate& crate);
-    void update();  // Used for update objects that needs refreshing, like the camera
+    void buildCrate(SceneCrate& crate);
+    void applyCrate(const SceneCrate& crate);
 
-    ////// Setters //////
-    void addObject(const std::shared_ptr<Object3D>& object);
-    void addObject(const std::vector<std::shared_ptr<Object3D>>& objects);
-    
-    ////// Getters //////
-    const std::vector<std::shared_ptr<Object3D>>& getObjects() const;
+    void init(const SceneCrate& crate);
+    void update();
+
 
 private:
-    // CameraModule cameraModule;
-    std::vector<std::shared_ptr<Object3D>> objects;
+    std::vector<Object3D> objects;
 };

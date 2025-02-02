@@ -4,7 +4,6 @@
 - Manages ImGUI initialization and logic.
 - Provides all of the expected user controls,
   like changing colors and positions.
-
 */
 
 #pragma once
@@ -16,20 +15,19 @@
 #include <engines/window/windowEngine.hpp>
 #include <engines/render/renderEngine.hpp>
 #include <engines/scene/sceneEngine.hpp>
+#include <engines/camera/cameraEngine.hpp>
 
 
-struct UiCrate {
-    const WindowEngine* windowEngine;
-};
+struct UiCrate { };
 
 class UiEngine {
 public:
     UiEngine();
     ~UiEngine();
 
-    void init(const UiCrate& crate);
-    void update(RenderEngine& renderEngine, const SceneEngine& sceneEngine);
+    void init(const UiCrate& crate, const WindowEngine& windowEngine);
+    void update(RenderEngine& renderEngine, const SceneEngine& sceneEngine, CameraEngine& cameraEngine);
 
 private:
-    void uiLayout(RenderEngine& renderEngine, const SceneEngine& sceneEngine);
+    void uiLayout(RenderEngine& renderEngine, const SceneEngine& sceneEngine, CameraEngine& cameraEngine);
 };

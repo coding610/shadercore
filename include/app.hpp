@@ -27,5 +27,6 @@ private:
     WindowEngine    windowEngine;
     RenderEngine    renderEngine;
     SceneEngine     sceneEngine;
+    CameraEngine    cameraEngine;
     UiEngine        uiEngine;
 };

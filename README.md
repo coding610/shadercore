@@ -1,2 +1,2 @@
-# Pathtracer
-Based on shadercore.
+# Shadercore
+Base of my cpp-render projects.

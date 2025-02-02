@@ -3,7 +3,6 @@
 
 - Handles camera movement and projection matrixes.
 - Is treated like a special object by SceneEngine.
-
 */
 
 #pragma once

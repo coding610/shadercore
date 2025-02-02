@@ -2,7 +2,6 @@
 -- Material of object3D --
 
 - Simple material struct
-
 */
 
 #pragma once

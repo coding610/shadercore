@@ -6,8 +6,6 @@
 
 TODO:
 - Handle input
-- CameraModule
-
 */
 
 #pragma once

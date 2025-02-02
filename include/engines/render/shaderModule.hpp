@@ -3,7 +3,6 @@
 
 - Binds shaders during setup.
 - Ensuring the appropriate layout during runtime.
-
 */
 
 #pragma once

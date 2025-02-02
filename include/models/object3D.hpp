@@ -3,7 +3,6 @@
 
 - Includes a base class, Object3D, only used for allowing types. Has no real value.
 - Includes all other object types.
-
 */
 
 #pragma once

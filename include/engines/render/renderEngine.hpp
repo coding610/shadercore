@@ -4,7 +4,6 @@
 - Core rendering logic; shader program and rendering pipeline.
 - Responsible for initizialsing shaders and buffers (its sub modules).
 - Includes two modules, ShaderModule and BufferModule.
-
 */
 
 #pragma once

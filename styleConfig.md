@@ -1,83 +1,133 @@
-# StyleConfig
+# **Shadercore Engine Style Guide**
 
-## Structure
-- Every file using either one of a opengl dependency should include all in the order below:
-    - glew
-    - glfw3
-    - gl
-- Modules are more flexible than engines in design.
-- Every Engine should have a crate attatched to the INIT method.
-  The builder should be default.
-- Every Engine/Module should have a update method.
-- Every file should have a overview comment description.
-  In this comment description the name and the parent
-  should also be added "-- Name of Parent --".
-- Engines should interact with each other by passing
-  theirselfs as references in params in update function.
-- Modules should have no interaction between each other at all,
-  and should be saved privatly in the engine.
-- Modules should not be accessed by other engines.
-- Every engine/module should have a init, that will be seperatly
-  called from the constructor. The init will handle creating of
-  private members, and the constructor initializes the create info.
+## **1. File Structure & Organization**
 
+### **1.1. Includes**
+- Any file using OpenGL dependencies **must** include headers in this order:  
+  ```cpp
+  #include <GL/glew.h>
+  #include <GLFW/glfw3.h>
+  #include <GL/gl.h>
+  ```
+- Always use **absolute include paths** for project headers.
 
-Importante:
-    - One should only be able to access other engines by building a crate. The crate should be the same crate that one builds it with.
-        - Exceptions: Camera Window
-    - When running init, other engines should be provided outsidew of the crate
-
-
-## Naming
-### Code
-PascalCase for every class/struct.
-- []Engine
-- []Module
-- []Crate
-
-camelCase for every class member/method.
-- void myMethod();
-- int myMember;
-
-### Files
-- Files should be in camelCase.
-- Directory structure should be like below
-
+### **1.2. Directory Structure**
 ```
-* include
-    * engines
-        * \[Engine Name\]
-            * engine.hpp
-            * \[Potiential module names\].cpp
-
-* src
-    * engines
-        * \[Engine Name\]
-            * engine.cpp
-            * \[Potiential module names\].cpp
+/project_root
+├── include
+│   ├── engines
+│   │   ├── [EngineName]
+│   │   │   ├── engine.hpp
+│   │   │   ├── [ModuleName].hpp
+│   ├── modules
+│       ├── [ModuleName].hpp
+├── src
+│   ├── engines
+│   │   ├── [EngineName]
+│   │   │   ├── engine.cpp
+│   │   │   ├── [ModuleName].cpp
+│   ├── modules
+│       ├── [ModuleName].cpp
 ```
 
+### **1.3. File Comments**
+- Every header must have a **header comment** with:
+  - **File name**
+  - **Parent engine/module**
+  - **Brief description**
+- Format:
+  ```cpp
+  /*
+  -- [[Name]] of [[Parent]] --
 
-### Hierarchy
-1. Engine
-2. Module
+  - Responsibility 1
+  - Responsibility 2
+  - Responsibility 3
+  ...
+  */
+  ```
 
-## Style
-- Paths should always be absolute (to own hpp)
-- Public over private
-- Methods over variables
-- Long functions is prefered. Seperating functions into many is a possibility, but use it carefully.
-- Comment seperators is in the form of "////// \[\[speration\]\] //////"
-- They go: Builders, Setters and Getters (preferably one liners), Main
-- Include order:
-    - std libs
-    - opengl
-    - glfw
-    - vmml
-    - own includes
+---
 
-## Habits
-- Use const and references whenever possible.
-- All the engines/modules and descriptions should be added to excalidraw.
-- Avoid static
-- Use pragma once
+## **2. Engine & Module Design**
+
+### **2.1. Engines**
+- **Engines** manage state and **rarely** interact with other engines via **crates**.
+- Must contain:
+  - `init(const Crate&)`
+  - `update()`
+  - `buildCrate(const Crate&) const`
+  - `applyCrate(const Crate&)` *(rarely used except for full-system updates)*
+- Engines interact **only through crates**, except for:
+  - `WindowEngine`
+- Engines **must not** access other engines' modules.
+
+### **2.2. Modules**
+- **Modules** exist **only** inside their parent engine.
+- Modules **must not** interact with each other.
+- Must contain:
+  - `init()`
+  - `update()`
+- Stored as **private members** inside their parent engine.
+
+### **2.3. Engine Initialization**
+- The constructor does nothing, and is only there to initialize the module at start.
+- **Crates** are passed during `init()` but **not** in the constructor.
+- The init module is a eqivialent to a normal constructor.
+
+---
+
+## **3. Naming Conventions**
+
+### **3.1. Classes & Structs**
+- Use **PascalCase** for all classes and structs.
+- Naming format:
+  - `RenderEngine`
+  - `ShaderModule`
+  - `RenderCrate`
+
+### **3.2. Methods & Members**
+- Use **camelCase** for class methods and members.
+  ```cpp
+  void myMethod();
+  int myMember;
+  ```
+
+### **3.3. File Names**
+- Use **camelCase** for file names.
+
+---
+
+## **4. Code Style**
+
+### **4.1. Function Structure**
+- **Long functions** are preferred.
+- Splitting into smaller functions is allowed but should be **carefully considered**.
+
+### **4.2. Code Order**
+1. **Builders**
+2. **Setters & Getters** *(preferably one-liners)*
+3. **Main Logic**
+
+### **4.3. Comment Separators**
+- Use:
+  ```cpp
+  ////// [[ Section Name ]] //////
+  ```
+
+### **4.4. Include Order**
+1. OpenGL  
+2. GLFW  
+3. Vmml
+4. Standard Libraries  
+5. Project includes  
+
+---
+
+## **5. Best Practices & Habits**
+- **Use `const` and references** wherever possible.
+- **Avoid `static`** unless necessary.
+- **Use `#pragma once`** in headers.
+- **Engines & modules must be documented in Excalidraw**.
+
+---

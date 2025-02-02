@@ -3,7 +3,6 @@
 
 - Encapsulates GLFW for window creation and input handling.
 - Stores window dimensions, input callbacks and OpenGL contex details.
-
 */
 
 #pragma once

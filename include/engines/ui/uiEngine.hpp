@@ -4,7 +4,6 @@
 - Manages ImGUI initialization and logic.
 - Provides all of the expected user controls,
   like changing colors and positions.
-
 */
 
 #pragma once
